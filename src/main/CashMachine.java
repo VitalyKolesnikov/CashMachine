@@ -7,6 +7,9 @@ import main.exception.NotEnoughMoneyException;
 import java.util.Locale;
 
 public class CashMachine {
+
+    public static final String RESOURCE_PATH = CashMachine.class.getPackage().getName() + ".resources.";
+
     public static void main(String[] args) throws NotEnoughMoneyException {
         Locale.setDefault(Locale.ENGLISH);
 
@@ -18,7 +21,7 @@ public class CashMachine {
                 CommandExecutor.execute(operation);
             } while (operation != Operation.EXIT);
         } catch (InterruptOperationException e) {
-            ConsoleHelper.writeMessage("Good bye!");
+            ConsoleHelper.printExitMessage();
         }
     }
 }

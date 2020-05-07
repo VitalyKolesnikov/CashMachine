@@ -9,18 +9,13 @@ import java.util.ResourceBundle;
 
 class DepositCommand implements Command {
 
-    private ResourceBundle res = ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + "/resources/deposit_en");
+    private ResourceBundle res = ResourceBundle.getBundle(CashMachine.RESOURCE_PATH + "deposit_en");
 
     @Override
     public void execute() throws InterruptOperationException {
         ConsoleHelper.writeMessage(res.getString("before"));
         String code = ConsoleHelper.askCurrencyCode();
-        String[] str;
-
-        while (true) {
-                str = ConsoleHelper.getValidTwoDigits(code);
-                break;
-        }
+        String[] str = ConsoleHelper.getValidTwoDigits(code);
 
         int amount = Integer.parseInt(str[0]);
         int number = Integer.parseInt(str[1]);

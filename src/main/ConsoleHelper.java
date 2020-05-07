@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 public class ConsoleHelper {
 
     private static BufferedReader bis = new BufferedReader(new InputStreamReader(System.in));
-    private static ResourceBundle res = ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + "/resources/common_en");
+    private static ResourceBundle res = ResourceBundle.getBundle(CashMachine.RESOURCE_PATH + "common_en");
 
     public static void writeMessage(String message) {
         System.out.println(message);
@@ -20,7 +20,6 @@ public class ConsoleHelper {
         try {
             String str = bis.readLine();
             if (str.equalsIgnoreCase("exit")) {
-                ConsoleHelper.writeMessage(res.getString("the.end"));
                 throw new InterruptOperationException();
             } else {
                 return str;
@@ -47,6 +46,7 @@ public class ConsoleHelper {
             ConsoleHelper.writeMessage(res.getString("invalid.data"));
         }
 
+        assert str != null;
         return str.split(" ");
     }
 
@@ -64,5 +64,9 @@ public class ConsoleHelper {
         } catch (IllegalArgumentException e) {
             return askOperation();
         }
+    }
+
+    public static void printExitMessage() {
+        writeMessage(res.getString("the.end"));
     }
 }
